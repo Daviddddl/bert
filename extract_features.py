@@ -26,6 +26,7 @@ import re
 import modeling
 import tokenization
 import tensorflow as tf
+from tqdm import tqdm
 
 flags = tf.flags
 
@@ -211,7 +212,7 @@ def convert_examples_to_features(examples, seq_length, tokenizer):
   """Loads a data file into a list of `InputBatch`s."""
 
   features = []
-  for (ex_index, example) in enumerate(examples):
+  for (ex_index, example) in tqdm(enumerate(examples)):
     tokens_a = tokenizer.tokenize(example.text_a)
 
     tokens_b = None
@@ -359,11 +360,12 @@ def main(_):
 
   examples = read_examples(FLAGS.input_file)
 
+  print 'begin to convert_examples_to_features'
   features = convert_examples_to_features(
       examples=examples, seq_length=FLAGS.max_seq_length, tokenizer=tokenizer)
 
   unique_id_to_feature = {}
-  for feature in features:
+  for feature in tqdm(features):
     unique_id_to_feature[feature.unique_id] = feature
 
   model_fn = model_fn_builder(
