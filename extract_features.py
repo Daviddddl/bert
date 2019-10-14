@@ -391,11 +391,15 @@ def main(_):
   tf.logging.info("******************* begin to getwriter **********************")
   with codecs.getwriter("utf-8")(tf.gfile.Open(FLAGS.output_file,
                                                "w")) as writer:
-    for result in tqdm(estimator.predict(input_fn, yield_single_examples=True)):
+    res_id = 0
+    for result in estimator.predict(input_fn, yield_single_examples=True):
+        res_id += 1
       unique_id = int(result["unique_id"])
       feature = unique_id_to_feature[unique_id]
       output_json = collections.OrderedDict()
       output_json["linex_index"] = unique_id
+      output_json["tokens"] = " ".join('%s' % v for v in feature.tokens)
+      print res_id, output_json["tokens"]
       all_features = []
       for (i, token) in enumerate(feature.tokens):
         all_layers = []
