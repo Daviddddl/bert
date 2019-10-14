@@ -399,7 +399,7 @@ def main(_):
       output_json = collections.OrderedDict()
       output_json["linex_index"] = unique_id
       output_json["tokens"] = " ".join('%s' % v for v in feature.tokens)
-      print res_id, output_json["tokens"]
+      tf.logging.info(res_id, output_json["tokens"])
       all_features = []
       for (i, token) in enumerate(feature.tokens):
         all_layers = []
