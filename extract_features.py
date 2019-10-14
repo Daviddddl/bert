@@ -360,11 +360,13 @@ def main(_):
 
   examples = read_examples(FLAGS.input_file)
 
-  tf.logging.info("begin to convert_examples_to_features")
+  tf.logging.info("******************* begin to convert_examples_to_features **********************")
   features = convert_examples_to_features(
       examples=examples, seq_length=FLAGS.max_seq_length, tokenizer=tokenizer)
 
   unique_id_to_feature = {}
+  tf.logging.info("******************* begin to unique_id_to_feature **********************")
+
   for feature in tqdm(features):
     unique_id_to_feature[feature.unique_id] = feature
 
