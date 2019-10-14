@@ -393,7 +393,7 @@ def main(_):
                                                "w")) as writer:
     res_id = 0
     for result in estimator.predict(input_fn, yield_single_examples=True):
-        res_id += 1
+      res_id += 1
       unique_id = int(result["unique_id"])
       feature = unique_id_to_feature[unique_id]
       output_json = collections.OrderedDict()
