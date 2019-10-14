@@ -360,7 +360,7 @@ def main(_):
 
   examples = read_examples(FLAGS.input_file)
 
-  print 'begin to convert_examples_to_features'
+  tf.logging.info("begin to convert_examples_to_features")
   features = convert_examples_to_features(
       examples=examples, seq_length=FLAGS.max_seq_length, tokenizer=tokenizer)
 
